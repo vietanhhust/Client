@@ -40,6 +40,20 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
+          "dependencies": {
+            "Microsoft.AspNetCore.SignalR.Client": {
+              "target": "Package",
+              "version": "[5.0.1, )"
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[12.0.3, )"
+            },
+            "sharpAHK": {
+              "target": "Package",
+              "version": "[1.0.0.5, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
