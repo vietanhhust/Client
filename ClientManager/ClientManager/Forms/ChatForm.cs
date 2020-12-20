@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ClientManager.Model.StaticModel;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -7,21 +8,22 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Microsoft.AspNetCore.SignalR.Client;
+using Microsoft.AspNetCore.SignalR;
 
 namespace ClientManager.Forms
 {
     public partial class ChatForm : Form
     {
-        int i = 0; 
         public ChatForm()
         {
             InitializeComponent();
         }
 
+        // Bấm nút gửi chat tới server
         private void Button1_Click(object sender, EventArgs e)
         {
-            ListViewItem item = new ListViewItem("[Admin]: " + "Test");
-            this.lstChatLine.Items.Add(item);
+            this.SendChat(); 
         }
 
         private async void KeyUpEnter(object sender, KeyEventArgs e)
@@ -35,9 +37,15 @@ namespace ClientManager.Forms
 
         private void SendChat()
         {
-            ListViewItem item = new ListViewItem("[User]: " + this.txtChat.Text);
-            this.lstChatLine.Items.Add(item);
-            this.txtChat.Text = "";
+            if(this.txtChat.Text=="" || this.txtChat.Text is null)
+            { return; }
+            else
+            {
+                ListViewItem item = new ListViewItem($"[{StaticModels.CurrentAccount.AccountName}]: " + this.txtChat.Text);
+                this.lstChatLine.Items.Add(item);
+                StaticModels.HubConnection.InvokeAsync("sendToAdmin", this.txtChat.Text);
+                this.txtChat.Text = "";
+            }
         }
 
         private void ChatForm_FormClosing(object sender, FormClosingEventArgs e)

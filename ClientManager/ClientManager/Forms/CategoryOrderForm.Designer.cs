@@ -31,31 +31,32 @@
             this.pnListCategoryItem = new System.Windows.Forms.Panel();
             this.pnDatagridView = new System.Windows.Forms.Panel();
             this.dataGridViewOrder = new System.Windows.Forms.DataGridView();
-            this.CategoryItem = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Price = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pnButtonChooseCategory = new System.Windows.Forms.Panel();
             this.lbTongTien = new System.Windows.Forms.Label();
             this.lbTotalPrice = new System.Windows.Forms.Label();
             this.btnOrder = new System.Windows.Forms.Button();
             this.btnHide = new System.Windows.Forms.Button();
+            this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CategoryItemName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Price = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pnDatagridView.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewOrder)).BeginInit();
             this.SuspendLayout();
             // 
             // pnListCategoryItem
             // 
-            this.pnListCategoryItem.Location = new System.Drawing.Point(12, 49);
+            this.pnListCategoryItem.Location = new System.Drawing.Point(12, 57);
             this.pnListCategoryItem.Name = "pnListCategoryItem";
-            this.pnListCategoryItem.Size = new System.Drawing.Size(675, 178);
+            this.pnListCategoryItem.Size = new System.Drawing.Size(675, 230);
             this.pnListCategoryItem.TabIndex = 0;
             // 
             // pnDatagridView
             // 
             this.pnDatagridView.Controls.Add(this.dataGridViewOrder);
-            this.pnDatagridView.Location = new System.Drawing.Point(12, 233);
+            this.pnDatagridView.Location = new System.Drawing.Point(12, 291);
             this.pnDatagridView.Name = "pnDatagridView";
-            this.pnDatagridView.Size = new System.Drawing.Size(675, 215);
+            this.pnDatagridView.Size = new System.Drawing.Size(675, 232);
             this.pnDatagridView.TabIndex = 1;
             // 
             // dataGridViewOrder
@@ -63,21 +64,82 @@
             this.dataGridViewOrder.AllowUserToOrderColumns = true;
             this.dataGridViewOrder.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewOrder.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.CategoryItem,
+            this.Id,
+            this.CategoryItemName,
             this.Price,
             this.Amount});
-            this.dataGridViewOrder.Location = new System.Drawing.Point(3, 3);
+            this.dataGridViewOrder.Location = new System.Drawing.Point(3, 8);
             this.dataGridViewOrder.Name = "dataGridViewOrder";
             this.dataGridViewOrder.ReadOnly = true;
-            this.dataGridViewOrder.Size = new System.Drawing.Size(669, 209);
+            this.dataGridViewOrder.Size = new System.Drawing.Size(672, 209);
             this.dataGridViewOrder.TabIndex = 0;
             // 
-            // CategoryItem
+            // pnButtonChooseCategory
             // 
-            this.CategoryItem.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.CategoryItem.HeaderText = "Sản phẩm";
-            this.CategoryItem.Name = "CategoryItem";
-            this.CategoryItem.ReadOnly = true;
+            this.pnButtonChooseCategory.Location = new System.Drawing.Point(12, 7);
+            this.pnButtonChooseCategory.Name = "pnButtonChooseCategory";
+            this.pnButtonChooseCategory.Size = new System.Drawing.Size(675, 44);
+            this.pnButtonChooseCategory.TabIndex = 2;
+            // 
+            // lbTongTien
+            // 
+            this.lbTongTien.Location = new System.Drawing.Point(10, 520);
+            this.lbTongTien.Name = "lbTongTien";
+            this.lbTongTien.Size = new System.Drawing.Size(60, 35);
+            this.lbTongTien.TabIndex = 3;
+            this.lbTongTien.Text = "Tổng tiền:";
+            this.lbTongTien.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lbTotalPrice
+            // 
+            this.lbTotalPrice.BackColor = System.Drawing.Color.Transparent;
+            this.lbTotalPrice.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbTotalPrice.Location = new System.Drawing.Point(68, 520);
+            this.lbTotalPrice.Name = "lbTotalPrice";
+            this.lbTotalPrice.Size = new System.Drawing.Size(106, 35);
+            this.lbTotalPrice.TabIndex = 4;
+            this.lbTotalPrice.Text = "45,000 đ";
+            this.lbTotalPrice.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // btnOrder
+            // 
+            this.btnOrder.BackColor = System.Drawing.SystemColors.MenuHighlight;
+            this.btnOrder.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnOrder.ForeColor = System.Drawing.Color.White;
+            this.btnOrder.Location = new System.Drawing.Point(491, 520);
+            this.btnOrder.Name = "btnOrder";
+            this.btnOrder.Size = new System.Drawing.Size(92, 35);
+            this.btnOrder.TabIndex = 5;
+            this.btnOrder.Text = "Gọi dịch vụ";
+            this.btnOrder.UseVisualStyleBackColor = false;
+            this.btnOrder.Click += new System.EventHandler(this.BtnOrder_Click);
+            // 
+            // btnHide
+            // 
+            this.btnHide.BackColor = System.Drawing.SystemColors.WindowFrame;
+            this.btnHide.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnHide.ForeColor = System.Drawing.Color.White;
+            this.btnHide.Location = new System.Drawing.Point(592, 520);
+            this.btnHide.Name = "btnHide";
+            this.btnHide.Size = new System.Drawing.Size(92, 35);
+            this.btnHide.TabIndex = 6;
+            this.btnHide.Text = "Hủy";
+            this.btnHide.UseVisualStyleBackColor = false;
+            this.btnHide.Click += new System.EventHandler(this.Button1_Click);
+            // 
+            // Id
+            // 
+            this.Id.HeaderText = "Id";
+            this.Id.Name = "Id";
+            this.Id.ReadOnly = true;
+            this.Id.Visible = false;
+            // 
+            // CategoryItemName
+            // 
+            this.CategoryItemName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.CategoryItemName.HeaderText = "Sản phẩm";
+            this.CategoryItemName.Name = "CategoryItemName";
+            this.CategoryItemName.ReadOnly = true;
             // 
             // Price
             // 
@@ -92,64 +154,11 @@
             this.Amount.Name = "Amount";
             this.Amount.ReadOnly = true;
             // 
-            // pnButtonChooseCategory
-            // 
-            this.pnButtonChooseCategory.Location = new System.Drawing.Point(12, 7);
-            this.pnButtonChooseCategory.Name = "pnButtonChooseCategory";
-            this.pnButtonChooseCategory.Size = new System.Drawing.Size(675, 36);
-            this.pnButtonChooseCategory.TabIndex = 2;
-            // 
-            // lbTongTien
-            // 
-            this.lbTongTien.Location = new System.Drawing.Point(10, 457);
-            this.lbTongTien.Name = "lbTongTien";
-            this.lbTongTien.Size = new System.Drawing.Size(60, 35);
-            this.lbTongTien.TabIndex = 3;
-            this.lbTongTien.Text = "Tổng tiền:";
-            this.lbTongTien.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // lbTotalPrice
-            // 
-            this.lbTotalPrice.BackColor = System.Drawing.Color.Transparent;
-            this.lbTotalPrice.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbTotalPrice.Location = new System.Drawing.Point(68, 457);
-            this.lbTotalPrice.Name = "lbTotalPrice";
-            this.lbTotalPrice.Size = new System.Drawing.Size(106, 35);
-            this.lbTotalPrice.TabIndex = 4;
-            this.lbTotalPrice.Text = "45,000 đ";
-            this.lbTotalPrice.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // btnOrder
-            // 
-            this.btnOrder.BackColor = System.Drawing.SystemColors.MenuHighlight;
-            this.btnOrder.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnOrder.ForeColor = System.Drawing.Color.White;
-            this.btnOrder.Location = new System.Drawing.Point(491, 457);
-            this.btnOrder.Name = "btnOrder";
-            this.btnOrder.Size = new System.Drawing.Size(92, 35);
-            this.btnOrder.TabIndex = 5;
-            this.btnOrder.Text = "Gọi dịch vụ";
-            this.btnOrder.UseVisualStyleBackColor = false;
-            this.btnOrder.Click += new System.EventHandler(this.BtnOrder_Click);
-            // 
-            // btnHide
-            // 
-            this.btnHide.BackColor = System.Drawing.SystemColors.WindowFrame;
-            this.btnHide.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnHide.ForeColor = System.Drawing.Color.White;
-            this.btnHide.Location = new System.Drawing.Point(592, 457);
-            this.btnHide.Name = "btnHide";
-            this.btnHide.Size = new System.Drawing.Size(92, 35);
-            this.btnHide.TabIndex = 6;
-            this.btnHide.Text = "Hủy";
-            this.btnHide.UseVisualStyleBackColor = false;
-            this.btnHide.Click += new System.EventHandler(this.Button1_Click);
-            // 
             // CategoryOrderForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(699, 501);
+            this.ClientSize = new System.Drawing.Size(698, 571);
             this.Controls.Add(this.btnHide);
             this.Controls.Add(this.btnOrder);
             this.Controls.Add(this.lbTotalPrice);
@@ -184,7 +193,8 @@
         private System.Windows.Forms.DataGridView dataGridViewOrder;
         private System.Windows.Forms.Button btnOrder;
         private System.Windows.Forms.Button btnHide;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CategoryItem;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CategoryItemName;
         private System.Windows.Forms.DataGridViewTextBoxColumn Price;
         private System.Windows.Forms.DataGridViewTextBoxColumn Amount;
     }

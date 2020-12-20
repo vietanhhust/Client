@@ -8,6 +8,7 @@ using System.Reactive;
 using ClientManager.Models.AppModel;
 using ClientManager.Services;
 using System.Threading;
+using Microsoft.AspNetCore.SignalR.Client;
 
 namespace ClientManager.Model.StaticModel
 {
@@ -183,6 +184,24 @@ namespace ClientManager.Model.StaticModel
         // Biến này là tên file chứa client Id, khi cài đặt sẽ đọc ghi file này.
         static public string DatFilePath = "Client.dat";
 
+        // Biến này lưu các loại danh mục 
+        static public List<Category> ListCategory;
+
+        // Biến này lưu các item danh mục được trả về. 
+        static public List<CategoryItem> ListCategoryItem; 
+
+        // HubConnection chung của toàn bộ app. 
+        static public HubConnection HubConnection
+        {
+            get; set; 
+        }
+
+        // Biến này dùng để lưu tổng thời gian. 
+        static public float TotalTime { get; set; } = 0f;
+
+        // Biến này dùng để lưu thời gian đã trôi qua
+        static public float ElapsedTime { get; set; } = 0f;
+
     }
 
     public class LoginModel{
@@ -222,5 +241,13 @@ namespace ClientManager.Model.StaticModel
 
         // Change pass 
         static public string ChangePasswordEndpoint = String.Format("http://{0}/api/accounts/changepass/", StaticModels.ServerIp);
+
+        // Lấy về các category và categoryItem 
+        static public string CategoryEndpoint = String.Format("http://{0}/api/category", StaticModels.ServerIp);
+        static public string  CategoryItemEndpoint = String.Format("http://{0}/api/categoryitem", StaticModels.ServerIp);
+        static public string CategoryImageEndpoint = String.Format("http://{0}/categoryItemImage/", StaticModels.ServerIp);
+
+        //  SignalR Connect hub
+        static public string ClientHubEndpoint = String.Format("http://{0}/client", StaticModels.ServerIp);
     }
 }

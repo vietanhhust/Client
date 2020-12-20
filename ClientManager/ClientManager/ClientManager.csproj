@@ -242,6 +242,8 @@
       <DependentUpon>MenuForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\AppModel\Account.cs" />
+    <Compile Include="Models\AppModel\Category.cs" />
+    <Compile Include="Models\AppModel\CategoryItem.cs" />
     <Compile Include="Models\AppModel\Client.cs" />
     <Compile Include="Models\AppModel\GroupClient.cs" />
     <Compile Include="Models\Error\ErrorModel.cs" />
@@ -333,6 +335,9 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\defaultCategoryItem.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

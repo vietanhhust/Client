@@ -21,8 +21,8 @@ namespace ClientManager
             {
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
-                //StaticInitializeService.StaticItemInitialize();
-                Application.Run(StaticModels.CategoryOrderForm);
+                StaticInitializeService.StaticItemInitialize();
+                Application.Run(StaticModels.LockForm);
                 mutex.ReleaseMutex();
             }
             else

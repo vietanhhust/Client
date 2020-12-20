@@ -5,6 +5,7 @@ using System.Net;
 using Newtonsoft.Json;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Drawing;
 
 namespace ClientManager.Services
 {
@@ -106,6 +107,24 @@ namespace ClientManager.Services
                 }
             }
         }
+
+        // Get Image 
+        public Bitmap getImage(string url)
+        {
+            try
+            {
+                using(HttpClient client = new HttpClient())
+                {
+                    var result = client.GetAsync(url).Result;
+                    var image = Image.FromStream(result.Content.ReadAsStreamAsync().Result);
+                    return new Bitmap(image);
+                }
+            }catch
+            {
+                return null;
+            }
+        }
+
 
         public void Dispose()
         {

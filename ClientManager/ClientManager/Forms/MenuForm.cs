@@ -9,6 +9,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Microsoft.AspNetCore.SignalR.Client;
+using Microsoft.AspNetCore.SignalR; 
 
 namespace ClientManager.Forms
 {
@@ -69,7 +71,13 @@ namespace ClientManager.Forms
         // Logout mọi thứ. 
         private async void BtnLogout_Click(object sender, EventArgs e)
         {
-            using(ApiService apiService = new ApiService())
+            this.Logout(); 
+        }
+
+        // hàm logout 
+        private void Logout()
+        {
+            using (ApiService apiService = new ApiService())
             {
                 var logoutResult = apiService.postEntity<LoginModel>(EnpointUrl.LogoutEnpoint + StaticModels.ClientId,
                     new LoginModel()
@@ -77,7 +85,7 @@ namespace ClientManager.Forms
                         Password = "",
                         Username = StaticModels.CurrentAccount.AccountName
                     });
-                if(logoutResult != null)
+                if (logoutResult != null)
                 {
                     this.Invoke((Action)(() =>
                     {
@@ -95,6 +103,7 @@ namespace ClientManager.Forms
                     MessageBox.Show("Mất kết nối đến máy chủ");
                 }
             }
+            StaticModels.HubConnection.StopAsync();
         }
         
         // Đổi mật khẩu của tài khoản hiện thời. 
@@ -119,6 +128,54 @@ namespace ClientManager.Forms
 
         private void NotifyIcon_MouseDoubleClick(object sender, MouseEventArgs e)
         {
+
+        }
+
+        // Show form dịch vụ
+        private void BtnOrderFood_Click(object sender, EventArgs e)
+        {
+            if (StaticModels.isConnect)
+            {
+                if (StaticModels.CategoryOrderForm.Visible)
+                {
+                    return;
+                }
+                else
+                {
+                    StaticModels.CategoryOrderForm.Show();
+                }
+            }
+            else
+            {
+                return;
+            }
+        }
+
+        // Nhắn tin
+        private void BtnChat_Click(object sender, EventArgs e)
+        {
+            if (!StaticModels.ChatForm.Visible)
+            {
+                StaticModels.ChatForm.Show(); 
+            }
+        }
+
+        private void TimerCount_Tick(object sender, EventArgs e)
+        {
+            StaticModels.ElapsedTime += 10;
+            Invoke((Action)(() =>
+            {
+                this.txtElapsedTime.Text = StaticInitializeService.MinuteToDate(StaticModels.ElapsedTime);
+                var used = StaticModels.TotalTime - StaticModels.ElapsedTime;
+                if(used <= 0)
+                {
+                    this.timerCount.Enabled = false;
+                    this.Logout(); 
+                    this.Hide(); 
+                }
+                this.txtRemainTime.Text = StaticInitializeService.MinuteToDate(used);
+                StaticModels.HubConnection.InvokeAsync("bill");
+            }));
 
         }
     }

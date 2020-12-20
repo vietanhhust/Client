@@ -121,6 +121,9 @@
   <data name="listIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\bin\Debug\listIcon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="xIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\bin\Debug\xIcon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="x" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\bin\Debug\x.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -139,7 +142,7 @@
   <data name="LockScreen" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\bin\Debug\LockScreen.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="xIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\bin\Debug\xIcon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="defaultCategoryItem" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\bin\Debug\defaultCategoryItem.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

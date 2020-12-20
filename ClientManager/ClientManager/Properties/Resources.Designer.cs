@@ -73,6 +73,16 @@ namespace ClientManager.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap defaultCategoryItem {
+            get {
+                object obj = ResourceManager.GetObject("defaultCategoryItem", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap keyIcon {
             get {
                 object obj = ResourceManager.GetObject("keyIcon", resourceCulture);

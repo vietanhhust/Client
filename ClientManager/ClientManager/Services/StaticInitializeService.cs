@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
@@ -21,8 +22,9 @@ namespace ClientManager.Services
             var clientInfo = LoadFromFile();
             StaticModels.ClientId = clientInfo.ClientId;
             StaticModels.ServerIp = clientInfo.ServerIp;
-            GetClientInfo(); 
-
+            GetClientInfo();
+            GetCategoryAndItem(); 
+          
             // Ở app này, để tránh lỗi về dispose/ null, thì tất cả các form là không thể tắt và là static
             StaticModels.ChatForm = new ChatForm();
             StaticModels.LockForm = new LockForm();
@@ -30,11 +32,13 @@ namespace ClientManager.Services
             StaticModels.ChangePasswordForm = new ChangePasswordForm();
             StaticModels.LoginForm = new LoginForm();
             StaticModels.TemporaryLockForm = new TemporaryLockForm();
-            StaticModels.CategoryOrderForm = new CategoryOrderForm(); 
+            StaticModels.CategoryOrderForm = new CategoryOrderForm();
 
             // Trạng thái ban đầu là chưa connect gì hết. 
             StaticModels.isConnect = false;
 
+           
+            Console.WriteLine("khoi tao xong");
         }
 
         // Hàm này lưu client Id vào file dat, hàm này và hàm dưới sẽ được sử dụng để lưu thông tin lúc tạo mới máy trạm
@@ -154,9 +158,80 @@ namespace ClientManager.Services
                         }
                         
                     }
-                    Thread.Sleep(60000);
+                    if (StaticModels.isConnect)
+                    {
+                        Thread.Sleep(60000);
+                    }
                 }
             
+            }).Start(); 
+        }
+
+        // Hàm này lấy category về 
+        static public void GetCategoryAndItem()
+        {
+            StaticModels.ListCategory = null;
+            StaticModels.ListCategoryItem = null; 
+            new Thread(() => { 
+                while(StaticModels.ListCategory is null || StaticModels.ListCategoryItem is null) 
+                {
+                    using (ApiService apiService = new ApiService())
+                    {
+                        var categoryResult = apiService.getEntity(EnpointUrl.CategoryEndpoint);
+                        var categoryItemresult = apiService.getEntity(EnpointUrl.CategoryItemEndpoint);
+                        if(categoryResult != null && categoryItemresult != null)
+                        {
+                            if (categoryResult.IsSuccessStatusCode && categoryItemresult.IsSuccessStatusCode)
+                            {
+                                StaticModels.ListCategory = new List<Category>();
+                                StaticModels.ListCategoryItem = new List<CategoryItem>();
+                                // Gọi về list category mới
+                                var listCategory = JsonConvert.
+                                    DeserializeObject<List<Category>>(
+                                    categoryResult.Content.ReadAsStringAsync().Result);
+
+                                listCategory.ForEach(item =>
+                                {
+                                    StaticModels.ListCategory.Add(item);
+                                });
+
+                                // Gọi về list category item mới
+                                var listCategoryItem = JsonConvert.DeserializeObject<List<CategoryItem>>(categoryItemresult.Content.ReadAsStringAsync().Result);
+                                listCategoryItem.ForEach(item =>
+                                {
+                                    // Tải ảnh của categoryItem về. 
+                                    if(item.ImageUrl != "" || item.ImageUrl != null)
+                                    {
+                                        var categoryItemBitmap = apiService.getImage(EnpointUrl.CategoryImageEndpoint + item.ImageUrl);
+                                        if(categoryItemBitmap is null)
+                                        {
+                                            item.Image = new Bitmap(Image.FromFile("defaultCategoryItem.png"));
+                                        }
+                                        else
+                                        {
+                                            item.Image = categoryItemBitmap;
+                                        }
+                                    } 
+
+                                    StaticModels.ListCategoryItem.Add(item);
+                                });
+                            }
+                            else
+                            {
+                                Console.WriteLine("Có lỗi");
+                                StaticModels.ListCategory = new List<Category>();
+                                StaticModels.ListCategoryItem = new List<CategoryItem>(); 
+                            }
+                           
+                        }
+                        else
+                        {
+                            Console.WriteLine("Khong the goi API Category ");
+                        }
+                    }
+                    Thread.Sleep(2000);
+                }
+                
             }).Start(); 
         }
 

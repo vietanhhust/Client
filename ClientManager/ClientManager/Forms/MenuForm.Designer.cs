@@ -53,6 +53,7 @@
             this.btnChangePass = new System.Windows.Forms.Button();
             this.btnChat = new System.Windows.Forms.Button();
             this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
+            this.timerCount = new System.Windows.Forms.Timer(this.components);
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
@@ -275,6 +276,7 @@
             this.btnOrderFood.Size = new System.Drawing.Size(65, 55);
             this.btnOrderFood.TabIndex = 11;
             this.btnOrderFood.UseVisualStyleBackColor = true;
+            this.btnOrderFood.Click += new System.EventHandler(this.BtnOrderFood_Click);
             // 
             // btnLockClient
             // 
@@ -310,6 +312,7 @@
             this.btnChat.Size = new System.Drawing.Size(65, 55);
             this.btnChat.TabIndex = 9;
             this.btnChat.UseVisualStyleBackColor = true;
+            this.btnChat.Click += new System.EventHandler(this.BtnChat_Click);
             // 
             // notifyIcon
             // 
@@ -321,6 +324,11 @@
             this.notifyIcon.Text = "Ẩn, hiện menu";
             this.notifyIcon.Visible = true;
             this.notifyIcon.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.NotifyIcon_MouseDoubleClick);
+            // 
+            // timerCount
+            // 
+            this.timerCount.Interval = 180000;
+            this.timerCount.Tick += new System.EventHandler(this.TimerCount_Tick);
             // 
             // MenuForm
             // 
@@ -371,5 +379,6 @@
         public System.Windows.Forms.Label label2;
         public System.Windows.Forms.Label lbChangePass;
         public System.Windows.Forms.NotifyIcon notifyIcon;
+        public System.Windows.Forms.Timer timerCount;
     }
 }

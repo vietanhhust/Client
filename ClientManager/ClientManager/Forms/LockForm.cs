@@ -22,7 +22,6 @@ namespace ClientManager.Forms
             this.GraphicInitialize();
             StaticModels.LoginFormSubject.Subscribe(data =>
             {
-                Console.WriteLine("Subject subscribe");
                 this.AfterLogin(); 
             });
             // Phần code tiếp theo của hàm này sẽ implement tính giờ để tự động tắt
@@ -103,23 +102,29 @@ namespace ClientManager.Forms
         // Sau khi nhận được tín hiệu Login thành công. 
         private void AfterLogin()
         {
-            this.lbDisconnect.Hide();
-            StaticModels.MenuForm.Show();
-            float totalMinuteInitialize = ((float)StaticModels.CurrentAccount.Balance.Value / (float)StaticModels.GroupClient.Price) * (float)60;
-            Invoke((Action)(() => {
-                StaticModels.MenuForm.txtTotalTime.Text = StaticInitializeService.MinuteToDate(totalMinuteInitialize);
-                StaticModels.MenuForm.txtElapsedTime.Text = "00:00";
-                StaticModels.MenuForm.txtRemainTime.Text = StaticModels.MenuForm.txtTotalTime.Text;
+            if (StaticModels.isConnect)
+            {
+                StaticInitializeService.GetCategoryAndItem(); 
+                this.lbDisconnect.Hide();
+                StaticModels.MenuForm.Show();
+                StaticModels.TotalTime = ((float)StaticModels.CurrentAccount.Balance.Value / (float)StaticModels.GroupClient.Price) * (float)60;
+                Invoke((Action)(() => {
+                    StaticModels.MenuForm.txtTotalTime.Text = StaticInitializeService.MinuteToDate(StaticModels.TotalTime);
+                    StaticModels.MenuForm.txtElapsedTime.Text = "00:00";
+                    StaticModels.MenuForm.txtRemainTime.Text = StaticModels.MenuForm.txtTotalTime.Text;
 
-                // Hiển thị tên và số máy. 
-                StaticModels.MenuForm.lbClientId.Text = "Máy " + StaticModels.ClientId;
-                StaticModels.MenuForm.lbAccountName.Text = StaticModels.CurrentAccount.AccountName;
+                    // Hiển thị tên và số máy. 
+                    StaticModels.MenuForm.lbClientId.Text = "Máy " + StaticModels.ClientId;
+                    StaticModels.MenuForm.lbAccountName.Text = StaticModels.CurrentAccount.AccountName;
+                    StaticModels.MenuForm.timerCount.Enabled = true;
+                }), null);
+                SignalRService.CreateHubConnection(); 
+                this.Hide();
+            }
+            else
+            {
 
-            }), null);
-
-
-
-            this.Hide();
+            }
         }
 
 

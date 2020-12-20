@@ -108,7 +108,7 @@ namespace ClientManager.Forms
         private void LoginForm_VisibleChanged(object sender, EventArgs e)
         {
             this.txtUserName.Text = StaticModels.CurrentAccount.AccountName;
-            this.txtUserName.Text = "";
+            this.txtPassword.Text = "";
             this.lbInfo.Text = "";
         }
     }
