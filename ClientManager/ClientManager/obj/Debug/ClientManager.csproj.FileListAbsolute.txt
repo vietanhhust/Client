@@ -70,6 +70,5 @@ D:\20201\Đồ 3\Project\Client\ClientManager\ClientManager\bin\Debug\System.Rea
 D:\20201\Đồ 3\Project\Client\ClientManager\ClientManager\obj\Debug\ClientManager.Forms.ChatForm.resources
 D:\20201\Đồ 3\Project\Client\ClientManager\ClientManager\obj\Debug\ClientManager.Forms.ChangePasswordForm.resources
 D:\20201\Đồ 3\Project\Client\ClientManager\ClientManager\obj\Debug\ClientManager.Forms.MenuForm.resources
-D:\20201\Đồ 3\Project\Client\ClientManager\ClientManager\obj\Debug\ClientManager.csprojAssemblyReference.cache
 D:\20201\Đồ 3\Project\Client\ClientManager\ClientManager\obj\Debug\ClientManager.Forms.TemporaryLockForm.resources
 D:\20201\Đồ 3\Project\Client\ClientManager\ClientManager\obj\Debug\ClientManager.Forms.CategoryOrderForm.resources

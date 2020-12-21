@@ -162,7 +162,7 @@ namespace ClientManager.Forms
 
         private void TimerCount_Tick(object sender, EventArgs e)
         {
-            StaticModels.ElapsedTime += 10;
+            StaticModels.ElapsedTime += 3;
             Invoke((Action)(() =>
             {
                 this.txtElapsedTime.Text = StaticInitializeService.MinuteToDate(StaticModels.ElapsedTime);
@@ -174,6 +174,7 @@ namespace ClientManager.Forms
                     this.Hide(); 
                 }
                 this.txtRemainTime.Text = StaticInitializeService.MinuteToDate(used);
+
                 StaticModels.HubConnection.InvokeAsync("bill");
             }));
 

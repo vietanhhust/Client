@@ -32,7 +32,7 @@ namespace ClientManager
             //StaticInitializeService.SaveToFile(new ClientInfoModel()
             //{
             //    ClientId = 1,
-            //    ServerIp = "192.168.1.2:5001"
+            //    ServerIp = "192.168.0.2:5001"
             //});
             //var obj = StaticInitializeService.LoadFromFile();
             //Console.Write(obj.ClientId + " : " + obj.ServerIp);
