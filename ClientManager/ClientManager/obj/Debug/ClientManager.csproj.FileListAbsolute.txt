@@ -72,3 +72,4 @@ D:\20201\Đồ 3\Project\Client\ClientManager\ClientManager\obj\Debug\ClientMana
 D:\20201\Đồ 3\Project\Client\ClientManager\ClientManager\obj\Debug\ClientManager.Forms.MenuForm.resources
 D:\20201\Đồ 3\Project\Client\ClientManager\ClientManager\obj\Debug\ClientManager.Forms.TemporaryLockForm.resources
 D:\20201\Đồ 3\Project\Client\ClientManager\ClientManager\obj\Debug\ClientManager.Forms.CategoryOrderForm.resources
+D:\20201\Đồ 3\Project\Client\ClientManager\ClientManager\obj\Debug\ClientManager.csprojAssemblyReference.cache

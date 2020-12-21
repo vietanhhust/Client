@@ -71,6 +71,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = " ";
             this.TopMost = true;
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.LockForm_FormClosing);
             this.DoubleClick += new System.EventHandler(this.LockForm_DoubleClick);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.LockForm_KeyUp);
