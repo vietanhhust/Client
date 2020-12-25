@@ -71,28 +71,31 @@ namespace ClientManager.Forms
             this.pnListCategoryItem.Controls.Clear(); 
             this.dataGridViewOrder.Rows.Clear(); 
             var locX = 0;
-            StaticModels.ListCategory.ForEach(item =>
+            if(StaticModels.ListCategory != null)
             {
-                var button = new Button()
+                StaticModels.ListCategory.ForEach(item =>
                 {
-                    Text = item.CategoryName,
-                    FlatStyle = FlatStyle.Flat,
-                    BackColor = Color.White,
-                    ForeColor = Color.Black,
-                    Height = 35,
-                    Name = item.Id.ToString(),
-                    MinimumSize = new Size(100, 40),
-                    TextAlign = ContentAlignment.MiddleCenter
-                };
-                this.pnButtonChooseCategory.Controls.Add(button);
-                button.FlatAppearance.BorderSize = 0;
-                button.Location = new Point(locX, 2);
-                button.FlatStyle = FlatStyle.Flat;
-                button.Click += CategoryChoose;
-                button.Show();
-                this.ListCategoryButtons.Add(button);
-                locX = locX + 100;
-            });
+                    var button = new Button()
+                    {
+                        Text = item.CategoryName,
+                        FlatStyle = FlatStyle.Flat,
+                        BackColor = Color.White,
+                        ForeColor = Color.Black,
+                        Height = 35,
+                        Name = item.Id.ToString(),
+                        MinimumSize = new Size(100, 40),
+                        TextAlign = ContentAlignment.MiddleCenter
+                    };
+                    this.pnButtonChooseCategory.Controls.Add(button);
+                    button.FlatAppearance.BorderSize = 0;
+                    button.Location = new Point(locX, 2);
+                    button.FlatStyle = FlatStyle.Flat;
+                    button.Click += CategoryChoose;
+                    button.Show();
+                    this.ListCategoryButtons.Add(button);
+                    locX = locX + 100;
+                });
+            }
                
         }
 
