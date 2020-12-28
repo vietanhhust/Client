@@ -167,7 +167,7 @@ namespace ClientManager.Forms
             {
                 this.txtElapsedTime.Text = StaticInitializeService.MinuteToDate(StaticModels.ElapsedTime);
                 var used = StaticModels.TotalTime - StaticModels.ElapsedTime;
-                if(used <= 0)
+                if(used < 0)
                 {
                     this.timerCount.Enabled = false;
                     this.Logout(); 

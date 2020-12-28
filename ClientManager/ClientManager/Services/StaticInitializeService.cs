@@ -67,8 +67,7 @@ namespace ClientManager.Services
         // Hàm này chạy tạo task chạy ngầm để xem Có lấy được thông tin về máy không. 
         static public void GetClientInfo()
         {
-            // Coi như là, trong phần mềm đã cài sẵn số máy rồi( ClientId)
-            // Lấy về thông tin của Client
+            
             new Thread(() => {
                 while (StaticModels.Client is null || StaticModels.GroupClient is null)
                 {

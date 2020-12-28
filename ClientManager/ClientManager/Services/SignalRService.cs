@@ -25,8 +25,6 @@ namespace ClientManager.Services
             // Đăng kí nhận tin nhắn của server.
             StaticModels.HubConnection.On<string>("serverReply", ServerReply);
 
-            // Nhận sự kiện nạp tiền từ server
-            StaticModels.HubConnection.On<float>("addBalance", ServerAddBalace);
 
             // Nhập sự kiện thay đổi categoryItem của server
             StaticModels.HubConnection.On("categoryChange", () => {
@@ -37,6 +35,21 @@ namespace ClientManager.Services
                         StaticModels.CategoryOrderForm.Hide(); 
                     }));
                 }
+            });
+
+            // Nhận tín hiệu nạp hoặc trừ tiền của tài khoản từ server, nhận số tiền mới, tính lại thời gian. 
+            StaticModels.HubConnection.On<int>("balanceChange", (int newBalance) =>
+            {
+                // Số tiền mới.
+                StaticModels.CurrentAccount.Balance = newBalance;
+                StaticModels.TotalTime = (float)newBalance / (float)StaticModels.GroupClient.Price * 60f; 
+                // Tính lại thời gian. 
+                StaticModels.MenuForm.Invoke((Action)(() => {
+                    StaticModels.MenuForm.txtTotalTime.Text = StaticInitializeService.MinuteToDate(StaticModels.TotalTime);
+                    StaticModels.MenuForm.txtElapsedTime.Text = StaticInitializeService.MinuteToDate(StaticModels.ElapsedTime);
+                    var used = StaticModels.TotalTime - StaticModels.ElapsedTime;
+                    StaticModels.MenuForm.txtRemainTime.Text = StaticInitializeService.MinuteToDate(used);
+                }));
             });
 
             StaticModels.HubConnection.StartAsync();

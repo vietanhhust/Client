@@ -196,10 +196,10 @@ namespace ClientManager.Model.StaticModel
             get; set; 
         }
 
-        // Biến này dùng để lưu tổng thời gian. 
+        // Biến này dùng để lưu tổng thời gian. ( Tính bằng phút) 
         static public float TotalTime { get; set; } = 0f;
 
-        // Biến này dùng để lưu thời gian đã trôi qua
+        // Biến này dùng để lưu thời gian đã trôi qua ( tính bằng phút ) 
         static public float ElapsedTime { get; set; } = 0f;
 
     }
