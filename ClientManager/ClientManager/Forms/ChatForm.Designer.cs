@@ -82,7 +82,6 @@
             this.MinimizeBox = false;
             this.Name = "ChatForm";
             this.ShowIcon = false;
-            this.ShowInTaskbar = false;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ChatForm_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();

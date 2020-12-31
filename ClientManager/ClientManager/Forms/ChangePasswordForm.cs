@@ -17,6 +17,7 @@ namespace ClientManager.Forms
         public ChangePasswordForm()
         {
             InitializeComponent();
+            Control.CheckForIllegalCrossThreadCalls = false;
         }
 
         

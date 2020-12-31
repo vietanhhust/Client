@@ -327,7 +327,7 @@
             // 
             // timerCount
             // 
-            this.timerCount.Interval = 180000;
+            this.timerCount.Interval = 60000;
             this.timerCount.Tick += new System.EventHandler(this.TimerCount_Tick);
             // 
             // MenuForm

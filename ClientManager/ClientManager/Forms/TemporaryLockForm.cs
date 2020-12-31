@@ -23,7 +23,8 @@ namespace ClientManager.Forms
         public TemporaryLockForm()
         {
             this.InitializeComponent();
-            this.GraphicInitialize(); 
+            this.GraphicInitialize();
+            Control.CheckForIllegalCrossThreadCalls = false;
         }
 
         // Khởi tạo những giao diện ban đầu

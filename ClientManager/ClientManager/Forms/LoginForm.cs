@@ -24,7 +24,8 @@ namespace ClientManager.Forms
         public LoginForm()
         {
             this.InitializeComponent();
-            this.GraphicInitialize(); 
+            this.GraphicInitialize();
+            Control.CheckForIllegalCrossThreadCalls = false;
         }
 
         // Khởi tạo những giao diện ban đầu
@@ -45,7 +46,7 @@ namespace ClientManager.Forms
 
                 }
                 if(StaticModels.isConnect)
-                    this.AuthenticateAccount();
+                   this.AuthenticateAccount();
             }
         }
 
@@ -59,7 +60,7 @@ namespace ClientManager.Forms
 
             }
             if (StaticModels.isConnect)
-                this.AuthenticateAccount(); 
+                this.AuthenticateAccount();
         }
 
         // Bấm nút đóng form login
@@ -108,8 +109,10 @@ namespace ClientManager.Forms
                 }
                 else
                 {
-                    StaticModels.isConnect = false;
-                    StaticModels.LockForm.lbDisconnect.Show(); 
+                    Invoke((Action)(() => {
+                        StaticModels.isConnect = false;
+                        StaticModels.LockForm.lbDisconnect.Show();
+                    }));
                 }
             }
         }

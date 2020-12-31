@@ -82,9 +82,11 @@ namespace ClientManager.Services
 
         public static Action<float> ServerAddBalace = (float balance) =>
         {
-            StaticModels.TotalTime += balance;
-            StaticModels.MenuForm.txtTotalTime.Text = StaticInitializeService.MinuteToDate(StaticModels.TotalTime);
-            var remain = StaticModels.TotalTime - StaticModels.ElapsedTime;
+            StaticModels.MenuForm.Invoke((Action)(() => {
+                StaticModels.TotalTime += balance;
+                StaticModels.MenuForm.txtTotalTime.Text = StaticInitializeService.MinuteToDate(StaticModels.TotalTime);
+                var remain = StaticModels.TotalTime - StaticModels.ElapsedTime;
+            }));
         };
     }
 }

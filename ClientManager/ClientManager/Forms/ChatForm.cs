@@ -18,6 +18,7 @@ namespace ClientManager.Forms
         public ChatForm()
         {
             InitializeComponent();
+            Control.CheckForIllegalCrossThreadCalls = false;
         }
 
         // Bấm nút gửi chat tới server
@@ -43,7 +44,7 @@ namespace ClientManager.Forms
             {
                 ListViewItem item = new ListViewItem($"[{StaticModels.CurrentAccount.AccountName}]: " + this.txtChat.Text);
                 this.lstChatLine.Items.Add(item);
-                StaticModels.HubConnection.InvokeAsync("sendToAdmin", this.txtChat.Text);
+                StaticModels.HubConnection.InvokeAsync("sendToAdmin", this.txtChat.Text, StaticModels.CurrentAccount.AccountName);
                 this.txtChat.Text = "";
             }
         }

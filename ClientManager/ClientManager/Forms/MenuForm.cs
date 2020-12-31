@@ -18,8 +18,10 @@ namespace ClientManager.Forms
     {
         public MenuForm()
         {
+            
             InitializeComponent();
-            this.GraphicInitialize(); 
+            this.GraphicInitialize();
+            Control.CheckForIllegalCrossThreadCalls = false;
         }
 
         // Khởi tạo hiển thị ban đầu. 
@@ -100,7 +102,7 @@ namespace ClientManager.Forms
                 }
                 else
                 {
-                    MessageBox.Show("Mất kết nối đến máy chủ");
+                    //MessageBox.Show("Mất kết nối đến máy chủ");
                 }
             }
             StaticModels.HubConnection.StopAsync();
@@ -162,7 +164,7 @@ namespace ClientManager.Forms
 
         private void TimerCount_Tick(object sender, EventArgs e)
         {
-            StaticModels.ElapsedTime += 3;
+            StaticModels.ElapsedTime += 1;
             Invoke((Action)(() =>
             {
                 this.txtElapsedTime.Text = StaticInitializeService.MinuteToDate(StaticModels.ElapsedTime);
@@ -175,7 +177,20 @@ namespace ClientManager.Forms
                 }
                 this.txtRemainTime.Text = StaticInitializeService.MinuteToDate(used);
 
-                StaticModels.HubConnection.InvokeAsync("bill");
+                try
+                {
+                    if(StaticModels.HubConnection.State== HubConnectionState.Connected)
+                    {
+                        StaticModels.HubConnection.InvokeAsync("bill");
+                    }
+                    else
+                    {
+                    }
+                }
+                catch
+                {
+                    //Console.Write("Lỗi phát từ hàm đồng hồ");
+                }
             }));
 
         }

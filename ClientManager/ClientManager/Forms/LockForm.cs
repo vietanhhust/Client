@@ -24,6 +24,7 @@ namespace ClientManager.Forms
             {
                 this.AfterLogin(); 
             });
+            Control.CheckForIllegalCrossThreadCalls = false;
             // Phần code tiếp theo của hàm này sẽ implement tính giờ để tự động tắt
         }
         
@@ -56,7 +57,7 @@ namespace ClientManager.Forms
             {
                 if (StaticModels.LoginForm.Visible)
                 {
-                    StaticModels.LoginForm.Invoke((Action)(() => {
+                    Invoke((Action)(() => {
                         StaticModels.LoginForm.TopLevel = true;
                         StaticModels.LoginForm.TopMost = true;
                     }), null);
@@ -64,28 +65,33 @@ namespace ClientManager.Forms
                 }
                 else
                 {
-                    StaticModels.LoginForm.txtPassword.Text = "";
-                    StaticModels.LoginForm.txtUserName.Text = "";
-                    StaticModels.LoginForm.TopLevel = true;
-                    StaticModels.LoginForm.TopMost = true;
-                    StaticModels.LoginForm.Show(); 
+                    Invoke((Action)(() => {
+                        StaticModels.LoginForm.txtPassword.Text = "";
+                        StaticModels.LoginForm.txtUserName.Text = "";
+                        StaticModels.LoginForm.TopLevel = true;
+                        StaticModels.LoginForm.TopMost = true;
+                        StaticModels.LoginForm.Show();
+                    }));
                 }
             }
             else
             {
-                if (StaticModels.TemporaryLockForm.Visible)
+                Invoke((Action)(() =>
                 {
-                    StaticModels.TemporaryLockForm.TopLevel = true;
-                    StaticModels.TemporaryLockForm.TopMost = true;
-                    return;
-                }
-                else
-                {
-                    StaticModels.TemporaryLockForm.Show();
-                    StaticModels.TemporaryLockForm.TopLevel = true;
-                    StaticModels.TemporaryLockForm.TopMost = true;
-                    return;
-                }
+                    if (StaticModels.TemporaryLockForm.Visible)
+                    {
+                        StaticModels.TemporaryLockForm.TopLevel = true;
+                        StaticModels.TemporaryLockForm.TopMost = true;
+                        return;
+                    }
+                    else
+                    {
+                        StaticModels.TemporaryLockForm.Show();
+                        StaticModels.TemporaryLockForm.TopLevel = true;
+                        StaticModels.TemporaryLockForm.TopMost = true;
+                        return;
+                    }
+                }));
             }
         }
 
@@ -106,7 +112,6 @@ namespace ClientManager.Forms
             {
                 StaticInitializeService.GetCategoryAndItem(); 
                 this.lbDisconnect.Hide();
-                StaticModels.MenuForm.Show();
                 StaticModels.TotalTime = ((float)StaticModels.CurrentAccount.Balance.Value / (float)StaticModels.GroupClient.Price) * (float)60;
                 Invoke((Action)(() => {
                     StaticModels.MenuForm.txtTotalTime.Text = StaticInitializeService.MinuteToDate(StaticModels.TotalTime);
@@ -117,8 +122,12 @@ namespace ClientManager.Forms
                     StaticModels.MenuForm.lbClientId.Text = "Máy " + StaticModels.ClientId;
                     StaticModels.MenuForm.lbAccountName.Text = StaticModels.CurrentAccount.AccountName;
                     StaticModels.MenuForm.timerCount.Enabled = true;
+                    StaticModels.MenuForm.Show();
                 }), null);
-                SignalRService.CreateHubConnection(); 
+                if (!StaticModels.isLockWithAccount)
+                {
+                    SignalRService.CreateHubConnection();
+                }
                 this.Hide();
             }
             else
