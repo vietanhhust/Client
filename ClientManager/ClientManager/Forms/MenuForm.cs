@@ -164,6 +164,7 @@ namespace ClientManager.Forms
 
         private void TimerCount_Tick(object sender, EventArgs e)
         {
+            Console.WriteLine("trừ tiền");
             StaticModels.ElapsedTime += 1;
             Invoke((Action)(() =>
             {

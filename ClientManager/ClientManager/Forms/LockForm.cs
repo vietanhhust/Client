@@ -113,6 +113,7 @@ namespace ClientManager.Forms
                 StaticInitializeService.GetCategoryAndItem(); 
                 this.lbDisconnect.Hide();
                 StaticModels.TotalTime = ((float)StaticModels.CurrentAccount.Balance.Value / (float)StaticModels.GroupClient.Price) * (float)60;
+                StaticModels.ElapsedTime = 0f;
                 Invoke((Action)(() => {
                     StaticModels.MenuForm.txtTotalTime.Text = StaticInitializeService.MinuteToDate(StaticModels.TotalTime);
                     StaticModels.MenuForm.txtElapsedTime.Text = "00:00";
@@ -123,6 +124,9 @@ namespace ClientManager.Forms
                     StaticModels.MenuForm.lbAccountName.Text = StaticModels.CurrentAccount.AccountName;
                     StaticModels.MenuForm.timerCount.Enabled = true;
                     StaticModels.MenuForm.Show();
+
+                    // Xóa lịch sử chat
+                    StaticModels.ChatForm.lstChatLine.Items.Clear(); 
                 }), null);
                 if (!StaticModels.isLockWithAccount)
                 {

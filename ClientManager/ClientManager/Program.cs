@@ -31,7 +31,7 @@ namespace ClientManager
             }
             //StaticInitializeService.SaveToFile(new ClientInfoModel()
             //{
-            //    ClientId = 2,
+            //    ClientId = 1,
             //    ServerIp = "192.168.0.2:5001"
             //});
             //var obj = StaticInitializeService.LoadFromFile();
